@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Spectra/Grayscale"
+﻿Shader "Spectra/Grayscale"
 {
     Properties
     {

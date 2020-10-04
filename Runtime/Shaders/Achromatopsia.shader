@@ -1,4 +1,4 @@
-Shader "Hidden/Spectra/Achromatopsia"
+Shader "Spectra/Achromatopsia"
 {
     Properties
     {

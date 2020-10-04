@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Spectra/Red"
+﻿Shader "Spectra/Red"
 {
     Properties
     {

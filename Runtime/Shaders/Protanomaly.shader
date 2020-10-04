@@ -1,4 +1,4 @@
-Shader "Hidden/Spectra/Protanomaly"
+Shader "Spectra/Protanomaly"
 {
     Properties
     {

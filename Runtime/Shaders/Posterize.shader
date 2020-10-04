@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Spectra/Posterize"
+﻿Shader "Spectra/Posterize"
 {
     Properties
     {

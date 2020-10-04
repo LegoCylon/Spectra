@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Spectra/Albedo" {
+﻿Shader "Spectra/Albedo" {
     HLSLINCLUDE
         #pragma vertex vert
 

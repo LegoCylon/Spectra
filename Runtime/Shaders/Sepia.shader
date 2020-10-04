@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Spectra/Sepia"
+﻿Shader "Spectra/Sepia"
 {
     Properties
     {

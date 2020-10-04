@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Spectra/Ghost" {
+﻿Shader "Spectra/Ghost" {
     HLSLINCLUDE
         // Required to compile gles 2.0 with standard srp library
         #pragma prefer_hlslcc gles

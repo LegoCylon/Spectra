@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Spectra/Green"
+﻿Shader "Spectra/Green"
 {
     Properties
     {

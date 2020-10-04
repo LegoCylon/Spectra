@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Spectra/Holodeck" {
+﻿Shader "Spectra/Holodeck" {
     HLSLINCLUDE
         #pragma vertex vert
 

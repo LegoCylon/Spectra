@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Spectra/Saturation"
+﻿Shader "Spectra/Saturation"
 {
     Properties
     {

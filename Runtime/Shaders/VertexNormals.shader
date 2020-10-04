@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Spectra/Vertex Normals" {
+﻿Shader "Spectra/Vertex Normals" {
     HLSLINCLUDE
         // Required to compile gles 2.0 with standard srp library
         #pragma prefer_hlslcc gles

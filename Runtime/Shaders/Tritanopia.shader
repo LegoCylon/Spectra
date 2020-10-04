@@ -1,4 +1,4 @@
-Shader "Hidden/Spectra/Tritanopia"
+Shader "Spectra/Tritanopia"
 {
     Properties
     {

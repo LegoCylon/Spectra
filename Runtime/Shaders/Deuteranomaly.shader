@@ -1,4 +1,4 @@
-Shader "Hidden/Spectra/Deuteranomaly"
+Shader "Spectra/Deuteranomaly"
 {
     Properties
     {

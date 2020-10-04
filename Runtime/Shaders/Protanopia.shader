@@ -1,4 +1,4 @@
-Shader "Hidden/Spectra/Protanopia"
+Shader "Spectra/Protanopia"
 {
     Properties
     {

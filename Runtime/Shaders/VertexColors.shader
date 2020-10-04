@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Spectra/Vertex Colors" {
+﻿Shader "Spectra/Vertex Colors" {
     HLSLINCLUDE
         #pragma vertex vert
 

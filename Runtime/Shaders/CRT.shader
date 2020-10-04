@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Spectra/CRT"
+﻿Shader "Spectra/CRT"
 {
     Properties
     {
@@ -10,11 +10,14 @@
         _Posterization("Posterization", Range(1., 1000.)) = 256.0
         _ScanlineFade("Scanline Fade", Range(0.0, 1.0)) = 0.05
         _VignetteFade("Vignette Fade", Range(0.0, 10.0)) = 5.0
+        [Toggle(MONOCHROME_ENABLED)] _Monochrome("Monochrome", Int) = 1
     }
 
     HLSLINCLUDE
         #include "StdLib.hlsl"
         #include "ColorFilters.hlsl"
+
+        #pragma shader_feature_local MONOCHROME_ENABLED
 
         struct Attributes {
             float4 positionOS : POSITION;
@@ -79,7 +82,9 @@
             color.rgb = floor(color.rgb * posterization) / posterization;
 
             // Monochrome
+            #if MONOCHROME_ENABLED
             color.rgb = half3(.1, 1., .1) * ColorFilterLuminance(color.rgb);
+            #endif
 
             // Vignette + Scanline
             half scanline = frac(_Time[3] + uv.y);

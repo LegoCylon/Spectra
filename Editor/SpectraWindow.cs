@@ -92,114 +92,114 @@ namespace Spectra.Editor
             {
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Albedo",
+                    ShaderName = "Spectra/Albedo",
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Achromatomaly",
+                    ShaderName = "Spectra/Achromatomaly",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Achromatopsia",
+                    ShaderName = "Spectra/Achromatopsia",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Deuteranomaly",
+                    ShaderName = "Spectra/Deuteranomaly",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Deuteranopia",
+                    ShaderName = "Spectra/Deuteranopia",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Protanomaly",
+                    ShaderName = "Spectra/Protanomaly",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Protanopia",
+                    ShaderName = "Spectra/Protanopia",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Tritanomaly",
+                    ShaderName = "Spectra/Tritanomaly",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Tritanopia",
+                    ShaderName = "Spectra/Tritanopia",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Grayscale",
+                    ShaderName = "Spectra/Grayscale",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Sepia",
+                    ShaderName = "Spectra/Sepia",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Red",
+                    ShaderName = "Spectra/Red",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Green",
+                    ShaderName = "Spectra/Green",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Blue",
+                    ShaderName = "Spectra/Blue",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Hue",
+                    ShaderName = "Spectra/Hue",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Saturation",
+                    ShaderName = "Spectra/Saturation",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Posterize",
+                    ShaderName = "Spectra/Posterize",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/CRT",
+                    ShaderName = "Spectra/CRT",
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Ghost",
+                    ShaderName = "Spectra/Ghost",
                     BeforeSceneViewGUI = sceneView => ClearCamera(sceneView: sceneView, clearColor: Color.black),
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Holodeck",
+                    ShaderName = "Spectra/Holodeck",
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Occlusion",
+                    ShaderName = "Spectra/Occlusion",
                     BeforeSceneViewGUI = sceneView => ClearCamera(sceneView: sceneView, clearColor: Color.black),
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Overdraw",
+                    ShaderName = "Spectra/Overdraw",
                     BeforeSceneViewGUI = sceneView => ClearCamera(sceneView: sceneView, clearColor: Color.black),
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Transparent",
+                    ShaderName = "Spectra/Transparent",
                     BeforeSceneViewGUI = sceneView => ClearCamera(sceneView: sceneView, clearColor: Color.black),
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Vertex Colors",
+                    ShaderName = "Spectra/Vertex Colors",
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Hidden/Spectra/Vertex Normals",
+                    ShaderName = "Spectra/Vertex Normals",
                     ReplaceTag = cReplaceTag,
                 },
             };
@@ -263,7 +263,7 @@ namespace Spectra.Editor
                 {
                     bool wasToggled = _ActiveFilter == filter;
                     bool nowToggled = EditorGUILayout.ToggleLeft(
-                        label: filter.ShaderName.Replace(oldValue: "Hidden/Spectra/", newValue: string.Empty),
+                        label: filter.ShaderName.Replace(oldValue: "Spectra/", newValue: string.Empty),
                         value: wasToggled);
                     if (wasToggled != nowToggled)
                     {
