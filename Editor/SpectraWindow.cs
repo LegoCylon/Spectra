@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 using UnityEditor;
@@ -15,7 +14,6 @@ namespace Spectra.Editor
         private class Filter
         {
             #region Properties
-            public bool IsPostProcessEffect => string.IsNullOrEmpty(value: ReplaceTag);
             public bool IsReplacementShader => !string.IsNullOrEmpty(value: ReplaceTag);
             #endregion
 
@@ -24,64 +22,6 @@ namespace Spectra.Editor
             public Action<SceneView> BeforeSceneViewGUI;
             public string ReplaceTag;
             #endregion
-        }
-
-        [RequireComponent(typeof(Camera)), ExecuteInEditMode, ImageEffectAllowedInSceneView]
-        private class RenderHook : MonoBehaviour
-        {
-            #region Fields
-            private Material _Material;
-            #endregion
-
-            private void OnDestroy() => DestroyMaterial();
-
-            private void OnRenderImage(RenderTexture src, RenderTexture dest)
-            {
-                SpectraWindow window = Resources.FindObjectsOfTypeAll<SpectraWindow>().FirstOrDefault();
-
-                AcquireMaterial(window: window);
-
-                if (window != null &&
-                    (Camera.current.cameraType & window._CameraMask) == Camera.current.cameraType &&
-                    _Material != null)
-                {
-                    Graphics.Blit(source: src, dest: dest, mat: _Material);
-
-                }
-                else
-                {
-                    Graphics.Blit(source: src, dest: dest);
-                }
-            }
-
-            private void AcquireMaterial (SpectraWindow window)
-            {
-                if (window == default)
-                {
-                    return;
-                }
-
-                bool isPostProcessEffect =
-                    window._Shader != null && window._ActiveFilter != null && window._ActiveFilter.IsPostProcessEffect;
-                if (_Material != null && (!isPostProcessEffect || _Material.shader != window._Shader))
-                {
-                    DestroyMaterial();
-                }
-
-                if (isPostProcessEffect && _Material == null)
-                {
-                    _Material = new Material(shader: window._Shader);
-                }
-            }
-
-            private void DestroyMaterial ()
-            {
-                if (_Material != null)
-                {
-                    DestroyImmediate(obj: _Material);
-                    _Material = null;
-                }
-            }
         }
         #endregion
 
@@ -92,114 +32,46 @@ namespace Spectra.Editor
             {
                 new Filter
                 {
-                    ShaderName = "Spectra/Albedo",
+                    ShaderName = "Spectra/Replacement/Albedo",
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Spectra/Achromatomaly",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Achromatopsia",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Deuteranomaly",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Deuteranopia",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Protanomaly",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Protanopia",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Tritanomaly",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Tritanopia",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Grayscale",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Sepia",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Red",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Green",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Blue",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Hue",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Saturation",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Posterize",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/CRT",
-                },
-                new Filter
-                {
-                    ShaderName = "Spectra/Ghost",
+                    ShaderName = "Spectra/Replacement/Ghost",
                     BeforeSceneViewGUI = sceneView => ClearCamera(sceneView: sceneView, clearColor: Color.black),
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Spectra/Holodeck",
+                    ShaderName = "Spectra/Replacement/Holodeck",
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Spectra/Occlusion",
+                    ShaderName = "Spectra/Replacement/Occlusion",
                     BeforeSceneViewGUI = sceneView => ClearCamera(sceneView: sceneView, clearColor: Color.black),
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Spectra/Overdraw",
+                    ShaderName = "Spectra/Replacement/Overdraw",
                     BeforeSceneViewGUI = sceneView => ClearCamera(sceneView: sceneView, clearColor: Color.black),
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Spectra/Transparent",
+                    ShaderName = "Spectra/Replacement/Transparent",
                     BeforeSceneViewGUI = sceneView => ClearCamera(sceneView: sceneView, clearColor: Color.black),
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Spectra/Vertex Colors",
+                    ShaderName = "Spectra/Replacement/Vertex Colors",
                     ReplaceTag = cReplaceTag,
                 },
                 new Filter
                 {
-                    ShaderName = "Spectra/Vertex Normals",
+                    ShaderName = "Spectra/Replacement/Vertex Normals",
                     ReplaceTag = cReplaceTag,
                 },
             };
@@ -318,21 +190,6 @@ namespace Spectra.Editor
 
             if (GetMainCamera() is Camera mainCamera)
             {
-                bool wantHook = _ActiveFilter != null && _ActiveFilter.IsPostProcessEffect;
-                RenderHook hook = mainCamera.GetComponent<RenderHook>();
-                if (wantHook)
-                {
-                    if (!hook)
-                    {
-                        hook = mainCamera.gameObject.AddComponent<RenderHook>();
-                        hook.hideFlags = HideFlags.HideAndDontSave | HideFlags.HideInInspector;
-                    }
-                }
-                else
-                {
-                    DestroyImmediate(obj: hook);
-                }
-
                 if ((_CameraMask & CameraType.Game) == CameraType.Game)
                 {
                     mainCamera.SetReplacementShader(shader: replacementShader, replacementTag: replacementTag);
